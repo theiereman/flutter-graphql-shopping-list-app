@@ -1,0 +1,38 @@
+type Query {
+  users: [User!]!
+}
+
+type Mutation {
+  addUser(email: String, password: String): User
+}
+
+### Types
+type User {
+  email: String
+  password: String
+  groups: [Group!]!
+  recipes: [Recipe!]!
+  lists: [List!]!
+}
+
+type Group {
+  name: String
+  users: [User!]!
+  recipes: [Recipe!]!
+  lists: [List!]!
+}
+
+type List {
+  name: String
+  items: [Item!]!
+}
+
+type Recipe {
+  name: String
+  ingredients: [Item!]!
+}
+
+type Item {
+  name: String
+  description: String
+}
