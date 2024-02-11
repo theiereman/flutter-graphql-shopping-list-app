@@ -5,7 +5,7 @@ export const UserCreateInput = inputObjectType({
   name: 'UserCreateInput',
   definition(t) {
     t.nonNull.string('email')
-    t.string('name')
+    t.nonNull.string('password')
   },
 })
 
@@ -24,8 +24,8 @@ export const Mutation = objectType({
       resolve: (_, args, context: Context) => {
         return context.prisma.user.create({
           data: {
-            name: args.data.name,
             email: args.data.email,
+            password: args.data.password,
           },
         })
       },

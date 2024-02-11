@@ -13,10 +13,9 @@ type Query {
 type User {
   email: String!
   id: Int!
-  name: String
 }
 
 input UserCreateInput {
   email: String!
-  name: String
+  password: String!
 }
