@@ -1,6 +1,8 @@
 import { makeSchema, asNexusMethod } from 'nexus'
 import * as types from './schema'
+import { join } from 'path'
 
+// * Backup for a tad more complex queries
 // const Query = objectType({
 //   name: 'Query',
 //   definition(t) {
@@ -266,7 +268,7 @@ export const schema = makeSchema({
     typegen: __dirname + '/generated/nexus.ts',
   },
   contextType: {
-    module: require.resolve('./context'),
+    module: join(__dirname, './context.ts'),
     export: 'Context',
   },
   sourceTypes: {

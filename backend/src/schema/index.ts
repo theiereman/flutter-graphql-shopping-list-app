@@ -1,3 +1,3 @@
-export * from './models/user'
-export * from './mutation'
-export * from './query'
+export * from './models'
+export * from './mutations'
+export * from './queries'

@@ -3,11 +3,12 @@
 
 
 type Mutation {
-  addUser(data: UserCreateInput!): User!
+  createUser(data: UserCreateInput!): User
 }
 
 type Query {
-  allUsers: [User!]!
+  user(id: Int!): User
+  users: [User!]!
 }
 
 type User {
