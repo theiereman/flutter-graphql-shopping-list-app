@@ -8,6 +8,7 @@ type Mutation {
 
 ### Types
 type User {
+  id: ID!
   email: String
   password: String
   groups: [Group!]!
@@ -16,6 +17,7 @@ type User {
 }
 
 type Group {
+  id: ID!
   name: String
   users: [User!]!
   recipes: [Recipe!]!
@@ -23,16 +25,19 @@ type Group {
 }
 
 type List {
+  id: ID!
   name: String
   items: [Item!]!
 }
 
 type Recipe {
+  id: ID!
   name: String
   ingredients: [Item!]!
 }
 
 type Item {
+  id: ID!
   name: String
   description: String
 }
