@@ -2,18 +2,34 @@
 ### Do not make changes to this file directly
 
 
+type Group {
+  id: Int!
+  name: String!
+  users: [User!]!
+}
+
 type Mutation {
+  addUserToGroup(groupId: ID!, userId: ID!): User
+  createGroup(name: String!): Group
   createUser(data: UserCreateInput!): User
 }
 
 type Query {
+  groups: [Group!]!
   user(id: Int!): User
   users: [User!]!
 }
 
-type User {
-  email: String!
+type Recipe {
   id: Int!
+  name: String!
+}
+
+type User {
+  email: String
+  groups: [Group!]!
+  id: Int!
+  recipes: [Recipe!]!
 }
 
 input UserCreateInput {

@@ -32,10 +32,18 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  Group: { // root type
+    id: number; // Int!
+    name: string; // String!
+  }
   Mutation: {};
   Query: {};
+  Recipe: { // root type
+    id: number; // Int!
+    name: string; // String!
+  }
   User: { // root type
-    email: string; // String!
+    email?: string | null; // String
     id: number; // Int!
   }
 }
@@ -51,35 +59,70 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  Group: { // field return type
+    id: number; // Int!
+    name: string; // String!
+    users: NexusGenRootTypes['User'][]; // [User!]!
+  }
   Mutation: { // field return type
+    addUserToGroup: NexusGenRootTypes['User'] | null; // User
+    createGroup: NexusGenRootTypes['Group'] | null; // Group
     createUser: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
+    groups: NexusGenRootTypes['Group'][]; // [Group!]!
     user: NexusGenRootTypes['User'] | null; // User
     users: NexusGenRootTypes['User'][]; // [User!]!
   }
-  User: { // field return type
-    email: string; // String!
+  Recipe: { // field return type
     id: number; // Int!
+    name: string; // String!
+  }
+  User: { // field return type
+    email: string | null; // String
+    groups: NexusGenRootTypes['Group'][]; // [Group!]!
+    id: number; // Int!
+    recipes: NexusGenRootTypes['Recipe'][]; // [Recipe!]!
   }
 }
 
 export interface NexusGenFieldTypeNames {
+  Group: { // field return type name
+    id: 'Int'
+    name: 'String'
+    users: 'User'
+  }
   Mutation: { // field return type name
+    addUserToGroup: 'User'
+    createGroup: 'Group'
     createUser: 'User'
   }
   Query: { // field return type name
+    groups: 'Group'
     user: 'User'
     users: 'User'
   }
+  Recipe: { // field return type name
+    id: 'Int'
+    name: 'String'
+  }
   User: { // field return type name
     email: 'String'
+    groups: 'Group'
     id: 'Int'
+    recipes: 'Recipe'
   }
 }
 
 export interface NexusGenArgTypes {
   Mutation: {
+    addUserToGroup: { // args
+      groupId: string; // ID!
+      userId: string; // ID!
+    }
+    createGroup: { // args
+      name: string; // String!
+    }
     createUser: { // args
       data: NexusGenInputs['UserCreateInput']; // UserCreateInput!
     }

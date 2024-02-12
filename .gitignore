@@ -208,4 +208,4 @@ dist
 # End of https://www.toptal.com/developers/gitignore/api/node,flutter
 
 backend/README.md
-backend/prisma/dev.db
+*.db
