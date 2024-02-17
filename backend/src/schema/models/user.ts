@@ -10,17 +10,20 @@ export const User = objectType({
     t.string('email')
     t.nonNull.list.nonNull.field('groups', {
       type: Group,
-      resolve: async (parent, _args, context) => {
-        const groups = await context.prisma.usersOnGroups.findMany({
-          where: {
-            userId: parent.id,
-          },
-          include: {
-            group: true,
-          },
-        })
+      resolve: async (parent, _args, context: Context) => {
+        const groups = await context.prisma.user
+          .findUnique({
+            where: {
+              id: parent.id,
+            },
+          })
+          .groups({
+            include: {
+              group: true,
+            },
+          })
 
-        return groups.map((groupRelation) => groupRelation.group)
+        return groups?.map((groupRelation) => groupRelation.group) ?? []
       },
     })
     t.nonNull.list.nonNull.field('recipes', {
