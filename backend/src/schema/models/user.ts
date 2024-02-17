@@ -26,6 +26,18 @@ export const User = objectType({
         return groups?.map((groupRelation) => groupRelation.group) ?? []
       },
     })
+    t.nonNull.list.nonNull.field('lists', {
+      type: 'List',
+      resolve: (parent, _args, ctx) => {
+        return ctx.prisma.user
+          .findUniqueOrThrow({
+            where: {
+              id: parent.id,
+            },
+          })
+          .lists()
+      },
+    })
     t.nonNull.list.nonNull.field('recipes', {
       type: Recipe,
       resolve: (parent, _args, ctx) => {

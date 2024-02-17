@@ -14,6 +14,10 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  ListCreateInput: { // input type
+    name: string; // String!
+    userId: number; // Int!
+  }
   UserCreateInput: { // input type
     email: string; // String!
     password: string; // String!
@@ -33,6 +37,14 @@ export interface NexusGenScalars {
 
 export interface NexusGenObjects {
   Group: { // root type
+    id: number; // Int!
+    name: string; // String!
+  }
+  Item: { // root type
+    id: number; // Int!
+    name: string; // String!
+  }
+  List: { // root type
     id: number; // Int!
     name: string; // String!
   }
@@ -64,13 +76,26 @@ export interface NexusGenFieldTypes {
     name: string; // String!
     users: NexusGenRootTypes['User'][]; // [User!]!
   }
+  Item: { // field return type
+    id: number; // Int!
+    list: NexusGenRootTypes['List'] | null; // List
+    name: string; // String!
+  }
+  List: { // field return type
+    id: number; // Int!
+    items: NexusGenRootTypes['Item'][]; // [Item!]!
+    name: string; // String!
+    user: NexusGenRootTypes['User'] | null; // User
+  }
   Mutation: { // field return type
     addUserToGroup: NexusGenRootTypes['User'] | null; // User
     createGroup: NexusGenRootTypes['Group'] | null; // Group
+    createListForUser: NexusGenRootTypes['List'] | null; // List
     createUser: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
     groups: NexusGenRootTypes['Group'][]; // [Group!]!
+    lists: NexusGenRootTypes['List'][]; // [List!]!
     user: NexusGenRootTypes['User'] | null; // User
     users: NexusGenRootTypes['User'][]; // [User!]!
   }
@@ -82,6 +107,7 @@ export interface NexusGenFieldTypes {
     email: string | null; // String
     groups: NexusGenRootTypes['Group'][]; // [Group!]!
     id: number; // Int!
+    lists: NexusGenRootTypes['List'][]; // [List!]!
     recipes: NexusGenRootTypes['Recipe'][]; // [Recipe!]!
   }
 }
@@ -92,13 +118,26 @@ export interface NexusGenFieldTypeNames {
     name: 'String'
     users: 'User'
   }
+  Item: { // field return type name
+    id: 'Int'
+    list: 'List'
+    name: 'String'
+  }
+  List: { // field return type name
+    id: 'Int'
+    items: 'Item'
+    name: 'String'
+    user: 'User'
+  }
   Mutation: { // field return type name
     addUserToGroup: 'User'
     createGroup: 'Group'
+    createListForUser: 'List'
     createUser: 'User'
   }
   Query: { // field return type name
     groups: 'Group'
+    lists: 'List'
     user: 'User'
     users: 'User'
   }
@@ -110,6 +149,7 @@ export interface NexusGenFieldTypeNames {
     email: 'String'
     groups: 'Group'
     id: 'Int'
+    lists: 'List'
     recipes: 'Recipe'
   }
 }
@@ -122,6 +162,9 @@ export interface NexusGenArgTypes {
     }
     createGroup: { // args
       name: string; // String!
+    }
+    createListForUser: { // args
+      data: NexusGenInputs['ListCreateInput']; // ListCreateInput!
     }
     createUser: { // args
       data: NexusGenInputs['UserCreateInput']; // UserCreateInput!

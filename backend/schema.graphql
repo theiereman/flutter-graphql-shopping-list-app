@@ -8,14 +8,34 @@ type Group {
   users: [User!]!
 }
 
+type Item {
+  id: Int!
+  list: List
+  name: String!
+}
+
+type List {
+  id: Int!
+  items: [Item!]!
+  name: String!
+  user: User
+}
+
+input ListCreateInput {
+  name: String!
+  userId: Int!
+}
+
 type Mutation {
   addUserToGroup(groupId: ID!, userId: ID!): User
   createGroup(name: String!): Group
+  createListForUser(data: ListCreateInput!): List
   createUser(data: UserCreateInput!): User
 }
 
 type Query {
   groups: [Group!]!
+  lists: [List!]!
   user(id: Int!): User
   users: [User!]!
 }
@@ -29,6 +49,7 @@ type User {
   email: String
   groups: [Group!]!
   id: Int!
+  lists: [List!]!
   recipes: [Recipe!]!
 }
 
