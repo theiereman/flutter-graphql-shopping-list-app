@@ -8,7 +8,7 @@ export const getAllGroups = queryField('groups', {
   },
 })
 
-export const getUser = queryField('group', {
+export const getGroup = queryField('group', {
   type: 'Group',
   args: {
     id: nonNull(intArg()),

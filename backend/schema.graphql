@@ -16,7 +16,7 @@ input GroupListCreationInput {
 
 type Item {
   amount: Float!
-  category(categ: ItemCategory): String
+  category: String
   description: String!
   iconUrl: String
   id: Int!
@@ -56,10 +56,13 @@ type Mutation {
   addListToGroup(data: GroupListCreationInput!): List
   addUserToGroup(groupId: ID!, userId: ID!): User
   createGroup(name: String!): Group
+  createItem(category: ItemCategory! = NONE, name: String!): Item
   createUser(data: UserCreateInput!): User
 }
 
 type Query {
+  categories: [String!]
+  group(id: Int!): Group
   groups: [Group!]!
   lists: [List!]!
   listsFromUser(

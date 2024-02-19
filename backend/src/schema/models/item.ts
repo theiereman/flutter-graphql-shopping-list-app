@@ -1,26 +1,28 @@
 import { arg, enumType, objectType } from 'nexus'
 import { Context } from '../../context'
 
+export const ItemCategoryArray = [
+  'NONE',
+  'GROCERIES',
+  'PRODUCE',
+  'DAIRY',
+  'MEAT_POULTRY',
+  'BAKERY',
+  'FROZEN_FOODS',
+  'CANNED_GOODS',
+  'BEVERAGES',
+  'SNACKS',
+  'HOUSEHOLD_ITEMS',
+  'PERSONAL_CARE',
+  'CLEANING_SUPPLIES',
+  'HEALTH_WELLNESS',
+  'BABY_CARE',
+  'PET_SUPPLIES',
+]
+
 export const ItemCategory = enumType({
   name: 'ItemCategory',
-  members: [
-    'NONE',
-    'GROCERIES',
-    'PRODUCE',
-    'DAIRY',
-    'MEAT_POULTRY',
-    'BAKERY',
-    'FROZEN_FOODS',
-    'CANNED_GOODS',
-    'BEVERAGES',
-    'SNACKS',
-    'HOUSEHOLD_ITEMS',
-    'PERSONAL_CARE',
-    'CLEANING_SUPPLIES',
-    'HEALTH_WELLNESS',
-    'BABY_CARE',
-    'PET_SUPPLIES',
-  ],
+  members: ItemCategoryArray,
 })
 
 export const Item = objectType({
@@ -31,14 +33,7 @@ export const Item = objectType({
     t.nonNull.string('description')
     t.nonNull.float('amount')
     t.string('iconUrl')
-    t.string('category', {
-      args: {
-        categ: arg({ type: 'ItemCategory' }),
-      },
-      resolve: (parent, { categ }) => {
-        return categ?.toString() ?? 'NONE'
-      },
-    })
+    t.string('category') //forced to enum ItemCategory in mutation / queries
     t.field('list', {
       type: 'List',
       resolve: (parent, args, context: Context) => {

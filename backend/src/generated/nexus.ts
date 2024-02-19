@@ -47,6 +47,7 @@ export interface NexusGenObjects {
   }
   Item: { // root type
     amount: number; // Float!
+    category?: string | null; // String
     description: string; // String!
     iconUrl?: string | null; // String
     id: number; // Int!
@@ -106,9 +107,12 @@ export interface NexusGenFieldTypes {
     addListToGroup: NexusGenRootTypes['List'] | null; // List
     addUserToGroup: NexusGenRootTypes['User'] | null; // User
     createGroup: NexusGenRootTypes['Group'] | null; // Group
+    createItem: NexusGenRootTypes['Item'] | null; // Item
     createUser: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
+    categories: string[] | null; // [String!]
+    group: NexusGenRootTypes['Group'] | null; // Group
     groups: NexusGenRootTypes['Group'][]; // [Group!]!
     lists: NexusGenRootTypes['List'][]; // [List!]!
     listsFromUser: NexusGenRootTypes['List'][]; // [List!]!
@@ -156,9 +160,12 @@ export interface NexusGenFieldTypeNames {
     addListToGroup: 'List'
     addUserToGroup: 'User'
     createGroup: 'Group'
+    createItem: 'Item'
     createUser: 'User'
   }
   Query: { // field return type name
+    categories: 'String'
+    group: 'Group'
     groups: 'Group'
     lists: 'List'
     listsFromUser: 'List'
@@ -179,11 +186,6 @@ export interface NexusGenFieldTypeNames {
 }
 
 export interface NexusGenArgTypes {
-  Item: {
-    category: { // args
-      categ?: NexusGenEnums['ItemCategory'] | null; // ItemCategory
-    }
-  }
   Mutation: {
     addListForUser: { // args
       data: NexusGenInputs['UserListCreationInput']; // UserListCreationInput!
@@ -198,11 +200,18 @@ export interface NexusGenArgTypes {
     createGroup: { // args
       name: string; // String!
     }
+    createItem: { // args
+      category: NexusGenEnums['ItemCategory']; // ItemCategory!
+      name: string; // String!
+    }
     createUser: { // args
       data: NexusGenInputs['UserCreateInput']; // UserCreateInput!
     }
   }
   Query: {
+    group: { // args
+      id: number; // Int!
+    }
     listsFromUser: { // args
       includeGroupLists: boolean; // Boolean!
       userId: number; // Int!
