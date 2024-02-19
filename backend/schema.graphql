@@ -15,9 +15,32 @@ input GroupListCreationInput {
 }
 
 type Item {
+  amount: Float!
+  category(categ: ItemCategory): String
+  description: String!
+  iconUrl: String
   id: Int!
   list: List
   name: String!
+}
+
+enum ItemCategory {
+  BABY_CARE
+  BAKERY
+  BEVERAGES
+  CANNED_GOODS
+  CLEANING_SUPPLIES
+  DAIRY
+  FROZEN_FOODS
+  GROCERIES
+  HEALTH_WELLNESS
+  HOUSEHOLD_ITEMS
+  MEAT_POULTRY
+  NONE
+  PERSONAL_CARE
+  PET_SUPPLIES
+  PRODUCE
+  SNACKS
 }
 
 type List {

@@ -25,18 +25,18 @@ model Group {
 }
 
 model UsersOnGroups {
-  user User @relation(fields: [userId], references: [id])
-  userId Int 
-  group Group @relation(fields: [groupId], references: [id])
-  groupId Int
+  user      User  @relation(fields: [userId], references: [id])
+  userId    Int 
+  group     Group   @relation(fields: [groupId], references: [id])
+  groupId   Int
 
   @@id([userId, groupId])
 }
 
 model List {
-  id      Int      @id @default(autoincrement())
-  name    String
-  items   Item[]
+  id            Int      @id @default(autoincrement())
+  name          String
+  items         Item[]
   userId        Int?
   user          User?     @relation(fields: [userId], references: [id])
   groupId       Int?
@@ -54,10 +54,14 @@ model Recipe {
 }
 
 model Item {
-  id        Int       @id @default(autoincrement())
-  name      String
-  recipeId  Int?
-  recipe    Recipe?   @relation(fields: [recipeId], references: [id])
-  listId    Int?
-  list      List?     @relation(fields: [listId], references: [id])  
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String
+  amount      Float
+  iconUrl     String
+  category    String
+  recipeId    Int?
+  recipe      Recipe?   @relation(fields: [recipeId], references: [id])
+  listId      Int?
+  list        List?     @relation(fields: [listId], references: [id])  
 }
