@@ -14,13 +14,17 @@ declare global {
 }
 
 export interface NexusGenInputs {
-  ListCreateInput: { // input type
+  GroupListCreationInput: { // input type
+    groupId: number; // Int!
     name: string; // String!
-    userId: number; // Int!
   }
   UserCreateInput: { // input type
     email: string; // String!
     password: string; // String!
+  }
+  UserListCreationInput: { // input type
+    name: string; // String!
+    userId: number; // Int!
   }
 }
 
@@ -73,6 +77,7 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 export interface NexusGenFieldTypes {
   Group: { // field return type
     id: number; // Int!
+    lists: NexusGenRootTypes['List'][]; // [List!]!
     name: string; // String!
     users: NexusGenRootTypes['User'][]; // [User!]!
   }
@@ -82,20 +87,23 @@ export interface NexusGenFieldTypes {
     name: string; // String!
   }
   List: { // field return type
+    group: NexusGenRootTypes['Group'] | null; // Group
     id: number; // Int!
     items: NexusGenRootTypes['Item'][]; // [Item!]!
     name: string; // String!
     user: NexusGenRootTypes['User'] | null; // User
   }
   Mutation: { // field return type
+    addListForUser: NexusGenRootTypes['List'] | null; // List
+    addListToGroup: NexusGenRootTypes['List'] | null; // List
     addUserToGroup: NexusGenRootTypes['User'] | null; // User
     createGroup: NexusGenRootTypes['Group'] | null; // Group
-    createListForUser: NexusGenRootTypes['List'] | null; // List
     createUser: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
     groups: NexusGenRootTypes['Group'][]; // [Group!]!
     lists: NexusGenRootTypes['List'][]; // [List!]!
+    listsFromUser: NexusGenRootTypes['List'][]; // [List!]!
     user: NexusGenRootTypes['User'] | null; // User
     users: NexusGenRootTypes['User'][]; // [User!]!
   }
@@ -115,6 +123,7 @@ export interface NexusGenFieldTypes {
 export interface NexusGenFieldTypeNames {
   Group: { // field return type name
     id: 'Int'
+    lists: 'List'
     name: 'String'
     users: 'User'
   }
@@ -124,20 +133,23 @@ export interface NexusGenFieldTypeNames {
     name: 'String'
   }
   List: { // field return type name
+    group: 'Group'
     id: 'Int'
     items: 'Item'
     name: 'String'
     user: 'User'
   }
   Mutation: { // field return type name
+    addListForUser: 'List'
+    addListToGroup: 'List'
     addUserToGroup: 'User'
     createGroup: 'Group'
-    createListForUser: 'List'
     createUser: 'User'
   }
   Query: { // field return type name
     groups: 'Group'
     lists: 'List'
+    listsFromUser: 'List'
     user: 'User'
     users: 'User'
   }
@@ -156,6 +168,12 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    addListForUser: { // args
+      data: NexusGenInputs['UserListCreationInput']; // UserListCreationInput!
+    }
+    addListToGroup: { // args
+      data: NexusGenInputs['GroupListCreationInput']; // GroupListCreationInput!
+    }
     addUserToGroup: { // args
       groupId: string; // ID!
       userId: string; // ID!
@@ -163,14 +181,15 @@ export interface NexusGenArgTypes {
     createGroup: { // args
       name: string; // String!
     }
-    createListForUser: { // args
-      data: NexusGenInputs['ListCreateInput']; // ListCreateInput!
-    }
     createUser: { // args
       data: NexusGenInputs['UserCreateInput']; // UserCreateInput!
     }
   }
   Query: {
+    listsFromUser: { // args
+      includeGroupLists: boolean; // Boolean!
+      userId: number; // Int!
+    }
     user: { // args
       id: number; // Int!
     }

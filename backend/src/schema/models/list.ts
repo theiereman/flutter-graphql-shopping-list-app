@@ -31,5 +31,17 @@ export const List = objectType({
           .user()
       },
     })
+    t.field('group', {
+      type: 'Group',
+      resolve: (parent, args, context: Context) => {
+        return context.prisma.list
+          .findUnique({
+            where: {
+              id: parent.id,
+            },
+          })
+          .group()
+      },
+    })
   },
 })

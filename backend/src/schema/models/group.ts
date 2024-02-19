@@ -23,6 +23,18 @@ export const Group = objectType({
 
         return users?.map((userRelation) => userRelation.user) ?? []
       },
-    })
+    }),
+      t.nonNull.list.nonNull.field('lists', {
+        type: 'List',
+        resolve: (parent, _args, ctx) => {
+          return ctx.prisma.group
+            .findUniqueOrThrow({
+              where: {
+                id: parent.id,
+              },
+            })
+            .lists()
+        },
+      })
   },
 })

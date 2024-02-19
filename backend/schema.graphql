@@ -4,8 +4,14 @@
 
 type Group {
   id: Int!
+  lists: [List!]!
   name: String!
   users: [User!]!
+}
+
+input GroupListCreationInput {
+  groupId: Int!
+  name: String!
 }
 
 type Item {
@@ -15,27 +21,29 @@ type Item {
 }
 
 type List {
+  group: Group
   id: Int!
   items: [Item!]!
   name: String!
   user: User
 }
 
-input ListCreateInput {
-  name: String!
-  userId: Int!
-}
-
 type Mutation {
+  addListForUser(data: UserListCreationInput!): List
+  addListToGroup(data: GroupListCreationInput!): List
   addUserToGroup(groupId: ID!, userId: ID!): User
   createGroup(name: String!): Group
-  createListForUser(data: ListCreateInput!): List
   createUser(data: UserCreateInput!): User
 }
 
 type Query {
   groups: [Group!]!
   lists: [List!]!
+  listsFromUser(
+    """Include the lists of the groups the user take part of."""
+    includeGroupLists: Boolean! = false
+    userId: Int!
+  ): [List!]!
   user(id: Int!): User
   users: [User!]!
 }
@@ -56,4 +64,9 @@ type User {
 input UserCreateInput {
   email: String!
   password: String!
+}
+
+input UserListCreationInput {
+  name: String!
+  userId: Int!
 }
