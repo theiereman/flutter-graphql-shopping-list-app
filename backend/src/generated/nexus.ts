@@ -22,9 +22,17 @@ export interface NexusGenInputs {
     email: string; // String!
     password: string; // String!
   }
+  UserDeleteInput: { // input type
+    id: number; // Int!
+  }
   UserListCreationInput: { // input type
     name: string; // String!
     userId: number; // Int!
+  }
+  UserUpdateInput: { // input type
+    email?: string | null; // String
+    id: number; // Int!
+    password?: string | null; // String
   }
 }
 
@@ -109,6 +117,8 @@ export interface NexusGenFieldTypes {
     createGroup: NexusGenRootTypes['Group'] | null; // Group
     createItem: NexusGenRootTypes['Item'] | null; // Item
     createUser: NexusGenRootTypes['User'] | null; // User
+    deleteUser: NexusGenRootTypes['User'] | null; // User
+    updateUser: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
     categories: string[] | null; // [String!]
@@ -162,6 +172,8 @@ export interface NexusGenFieldTypeNames {
     createGroup: 'Group'
     createItem: 'Item'
     createUser: 'User'
+    deleteUser: 'User'
+    updateUser: 'User'
   }
   Query: { // field return type name
     categories: 'String'
@@ -206,6 +218,12 @@ export interface NexusGenArgTypes {
     }
     createUser: { // args
       data: NexusGenInputs['UserCreateInput']; // UserCreateInput!
+    }
+    deleteUser: { // args
+      data: NexusGenInputs['UserDeleteInput']; // UserDeleteInput!
+    }
+    updateUser: { // args
+      data: NexusGenInputs['UserUpdateInput']; // UserUpdateInput!
     }
   }
   Query: {

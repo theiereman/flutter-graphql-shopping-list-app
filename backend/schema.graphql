@@ -58,6 +58,8 @@ type Mutation {
   createGroup(name: String!): Group
   createItem(category: ItemCategory! = NONE, name: String!): Item
   createUser(data: UserCreateInput!): User
+  deleteUser(data: UserDeleteInput!): User
+  updateUser(data: UserUpdateInput!): User
 }
 
 type Query {
@@ -92,7 +94,17 @@ input UserCreateInput {
   password: String!
 }
 
+input UserDeleteInput {
+  id: Int!
+}
+
 input UserListCreationInput {
   name: String!
   userId: Int!
+}
+
+input UserUpdateInput {
+  email: String
+  id: Int!
+  password: String
 }
