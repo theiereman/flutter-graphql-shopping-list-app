@@ -25,9 +25,9 @@ model Group {
 }
 
 model UsersOnGroups {
-  user      User  @relation(fields: [userId], references: [id])
+  user      User  @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int 
-  group     Group   @relation(fields: [groupId], references: [id])
+  group     Group   @relation(fields: [groupId], references: [id], onDelete: Cascade)
   groupId   Int
 
   @@id([userId, groupId])

@@ -13,6 +13,10 @@ input GroupCreateInput {
   name: String!
 }
 
+input GroupDeleteInput {
+  id: Int!
+}
+
 input GroupListCreationInput {
   groupId: Int!
   name: String!
@@ -67,6 +71,7 @@ type Mutation {
   createGroup(data: GroupCreateInput!): Group
   createItem(category: ItemCategory! = NONE, name: String!): Item
   createUser(data: UserCreateInput!): User
+  deleteGroup(data: GroupDeleteInput!): Group
   deleteUser(data: UserDeleteInput!): User
   updateGroup(data: GroupUpdateInput!): Group
   updateUser(data: UserUpdateInput!): User

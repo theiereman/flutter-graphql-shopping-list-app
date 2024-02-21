@@ -24,6 +24,13 @@ const GroupUpdateInput = inputObjectType({
   },
 })
 
+const GroupDeleteInput = inputObjectType({
+  name: 'GroupDeleteInput',
+  definition(t) {
+    t.nonNull.int('id')
+  },
+})
+
 export const createGroup = mutationField('createGroup', {
   type: 'Group',
   args: {
@@ -54,6 +61,20 @@ export const updateGroup = mutationField('updateGroup', {
       },
       data: {
         name: data.name,
+      },
+    })
+  },
+})
+
+export const deleteGroup = mutationField('deleteGroup', {
+  type: 'Group',
+  args: {
+    data: nonNull(GroupDeleteInput),
+  },
+  resolve: (_, { data }, context: Context) => {
+    return context.prisma.group.delete({
+      where: {
+        id: data.id,
       },
     })
   },
