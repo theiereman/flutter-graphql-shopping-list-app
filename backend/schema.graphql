@@ -27,13 +27,32 @@ input GroupUpdateInput {
   name: String!
 }
 
+enum ImperialUnit {
+  CUP
+  FL_OZ
+  GAL
+  LB
+  OZ
+  PT
+  QT
+}
+
+input IngredientCreationInput {
+  amount: Float! = 1
+  category: ItemCategory! = NONE
+  description: String
+  name: String!
+}
+
 type Item {
   amount: Float!
   category: String
   description: String!
   iconUrl: String
   id: Int!
+  imperialUnit: String
   list: List
+  metricUnit: String
   name: String!
 }
 
@@ -64,12 +83,20 @@ type List {
   user: User
 }
 
+enum MetricUnit {
+  CL
+  GRAM
+  KG
+  L
+  ML
+}
+
 type Mutation {
   addListForUser(data: UserListCreationInput!): List
   addListToGroup(data: GroupListCreationInput!): List
   addUserToGroup(groupId: ID!, userId: ID!): User
   createGroup(data: GroupCreateInput!): Group
-  createItem(category: ItemCategory! = NONE, name: String!): Item
+  createItem(data: IngredientCreationInput!): Item
   createUser(data: UserCreateInput!): User
   deleteGroup(data: GroupDeleteInput!): Group
   deleteUser(data: UserDeleteInput!): User
@@ -78,9 +105,10 @@ type Mutation {
 }
 
 type Query {
-  categories: [String!]
+  categories: [ItemCategory!]
   group(id: Int!): Group
   groups: [Group!]!
+  items: [Item!]
   lists: [List!]!
   listsFromUser(
     """Include the lists of the groups the user take part of."""

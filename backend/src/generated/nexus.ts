@@ -28,6 +28,12 @@ export interface NexusGenInputs {
     id: number; // Int!
     name: string; // String!
   }
+  IngredientCreationInput: { // input type
+    amount: number; // Float!
+    category: NexusGenEnums['ItemCategory']; // ItemCategory!
+    description?: string | null; // String
+    name: string; // String!
+  }
   UserCreateInput: { // input type
     email: string; // String!
     password: string; // String!
@@ -47,7 +53,9 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  ImperialUnit: "CUP" | "FL_OZ" | "GAL" | "LB" | "OZ" | "PT" | "QT"
   ItemCategory: "BABY_CARE" | "BAKERY" | "BEVERAGES" | "CANNED_GOODS" | "CLEANING_SUPPLIES" | "DAIRY" | "FROZEN_FOODS" | "GROCERIES" | "HEALTH_WELLNESS" | "HOUSEHOLD_ITEMS" | "MEAT_POULTRY" | "NONE" | "PERSONAL_CARE" | "PET_SUPPLIES" | "PRODUCE" | "SNACKS"
+  MetricUnit: "CL" | "GRAM" | "KG" | "L" | "ML"
 }
 
 export interface NexusGenScalars {
@@ -69,6 +77,8 @@ export interface NexusGenObjects {
     description: string; // String!
     iconUrl?: string | null; // String
     id: number; // Int!
+    imperialUnit?: string | null; // String
+    metricUnit?: string | null; // String
     name: string; // String!
   }
   List: { // root type
@@ -110,7 +120,9 @@ export interface NexusGenFieldTypes {
     description: string; // String!
     iconUrl: string | null; // String
     id: number; // Int!
+    imperialUnit: string | null; // String
     list: NexusGenRootTypes['List'] | null; // List
+    metricUnit: string | null; // String
     name: string; // String!
   }
   List: { // field return type
@@ -133,9 +145,10 @@ export interface NexusGenFieldTypes {
     updateUser: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
-    categories: string[] | null; // [String!]
+    categories: NexusGenEnums['ItemCategory'][] | null; // [ItemCategory!]
     group: NexusGenRootTypes['Group'] | null; // Group
     groups: NexusGenRootTypes['Group'][]; // [Group!]!
+    items: NexusGenRootTypes['Item'][] | null; // [Item!]
     lists: NexusGenRootTypes['List'][]; // [List!]!
     listsFromUser: NexusGenRootTypes['List'][]; // [List!]!
     user: NexusGenRootTypes['User'] | null; // User
@@ -167,7 +180,9 @@ export interface NexusGenFieldTypeNames {
     description: 'String'
     iconUrl: 'String'
     id: 'Int'
+    imperialUnit: 'String'
     list: 'List'
+    metricUnit: 'String'
     name: 'String'
   }
   List: { // field return type name
@@ -190,9 +205,10 @@ export interface NexusGenFieldTypeNames {
     updateUser: 'User'
   }
   Query: { // field return type name
-    categories: 'String'
+    categories: 'ItemCategory'
     group: 'Group'
     groups: 'Group'
+    items: 'Item'
     lists: 'List'
     listsFromUser: 'List'
     user: 'User'
@@ -227,8 +243,7 @@ export interface NexusGenArgTypes {
       data: NexusGenInputs['GroupCreateInput']; // GroupCreateInput!
     }
     createItem: { // args
-      category: NexusGenEnums['ItemCategory']; // ItemCategory!
-      name: string; // String!
+      data: NexusGenInputs['IngredientCreationInput']; // IngredientCreationInput!
     }
     createUser: { // args
       data: NexusGenInputs['UserCreateInput']; // UserCreateInput!
