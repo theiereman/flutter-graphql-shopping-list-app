@@ -1,22 +1,37 @@
-import { idArg, intArg, mutationField, nonNull, stringArg } from 'nexus'
+import { mutationField, nonNull } from 'nexus'
 import { Context } from '../../context'
-import { ItemCategory } from '../models'
-import { NexusEnumTypeDef } from 'nexus/dist/core'
+import { inputObjectType } from 'nexus/dist/core'
+
+export const IngredientCreationInput = inputObjectType({
+  name: 'IngredientCreationInput',
+  definition(t) {
+    t.nonNull.string('name')
+    t.string('description')
+    t.nonNull.field('category', {
+      type: 'ItemCategory',
+      default: 'NONE',
+    })
+    t.nonNull.float('amount', {
+      default: 1,
+    })
+  },
+})
+
+//TODO: implémenter une conversion automatique des unités lors de l'ajout / modification
 
 export const createItem = mutationField('createItem', {
   type: 'Item',
   args: {
-    name: nonNull(stringArg()),
-    category: nonNull(ItemCategory.asArg({ default: 'NONE' })),
+    data: nonNull(IngredientCreationInput),
   },
-  resolve: (_, args, context: Context) => {
+  resolve: (_, { data }, context: Context) => {
     return context.prisma.item.create({
       data: {
-        name: args.name,
+        name: data.name,
         description: '',
         iconUrl: '',
-        amount: 1,
-        category: args.category,
+        amount: data.amount,
+        category: data.category,
       },
     })
   },
