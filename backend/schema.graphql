@@ -9,8 +9,17 @@ type Group {
   users: [User!]!
 }
 
+input GroupCreateInput {
+  name: String!
+}
+
 input GroupListCreationInput {
   groupId: Int!
+  name: String!
+}
+
+input GroupUpdateInput {
+  id: Int!
   name: String!
 }
 
@@ -55,10 +64,11 @@ type Mutation {
   addListForUser(data: UserListCreationInput!): List
   addListToGroup(data: GroupListCreationInput!): List
   addUserToGroup(groupId: ID!, userId: ID!): User
-  createGroup(name: String!): Group
+  createGroup(data: GroupCreateInput!): Group
   createItem(category: ItemCategory! = NONE, name: String!): Item
   createUser(data: UserCreateInput!): User
   deleteUser(data: UserDeleteInput!): User
+  updateGroup(data: GroupUpdateInput!): Group
   updateUser(data: UserUpdateInput!): User
 }
 

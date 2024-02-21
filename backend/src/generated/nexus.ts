@@ -14,8 +14,15 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  GroupCreateInput: { // input type
+    name: string; // String!
+  }
   GroupListCreationInput: { // input type
     groupId: number; // Int!
+    name: string; // String!
+  }
+  GroupUpdateInput: { // input type
+    id: number; // Int!
     name: string; // String!
   }
   UserCreateInput: { // input type
@@ -118,6 +125,7 @@ export interface NexusGenFieldTypes {
     createItem: NexusGenRootTypes['Item'] | null; // Item
     createUser: NexusGenRootTypes['User'] | null; // User
     deleteUser: NexusGenRootTypes['User'] | null; // User
+    updateGroup: NexusGenRootTypes['Group'] | null; // Group
     updateUser: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
@@ -173,6 +181,7 @@ export interface NexusGenFieldTypeNames {
     createItem: 'Item'
     createUser: 'User'
     deleteUser: 'User'
+    updateGroup: 'Group'
     updateUser: 'User'
   }
   Query: { // field return type name
@@ -210,7 +219,7 @@ export interface NexusGenArgTypes {
       userId: string; // ID!
     }
     createGroup: { // args
-      name: string; // String!
+      data: NexusGenInputs['GroupCreateInput']; // GroupCreateInput!
     }
     createItem: { // args
       category: NexusGenEnums['ItemCategory']; // ItemCategory!
@@ -221,6 +230,9 @@ export interface NexusGenArgTypes {
     }
     deleteUser: { // args
       data: NexusGenInputs['UserDeleteInput']; // UserDeleteInput!
+    }
+    updateGroup: { // args
+      data: NexusGenInputs['GroupUpdateInput']; // GroupUpdateInput!
     }
     updateUser: { // args
       data: NexusGenInputs['UserUpdateInput']; // UserUpdateInput!

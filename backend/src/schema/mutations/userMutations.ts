@@ -11,7 +11,7 @@ import { Context } from '../../context'
 import {
   PASSWORD_VALIDATION_ERROR_MESSAGE,
   validatePassword,
-} from '../../utils/passwordUtils'
+} from '../../utils/stringValidationUtils'
 
 const UserCreateInput = inputObjectType({
   name: 'UserCreateInput',
