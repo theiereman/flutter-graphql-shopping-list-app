@@ -1,5 +1,5 @@
 export const PASSWORD_VALIDATION_ERROR_MESSAGE =
-  'Password must be at least 8 characters long and contain at least one number, one letter, and one special character (@$!%*#?&$^)'
+  'Password must be at least 8 characters long and contain at least one number, one letter, and one special character (@$!%*#?&$^_-)'
 
 export const EMAIL_VALIDATION_ERROR_MESSAGE = 'Email format invalid'
 
@@ -13,7 +13,7 @@ export const validateEmail = (email: string): boolean => {
 
 export const validatePassword = (password: string): boolean => {
   if (!password) return false
-  return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&^])[A-Za-z\d@$!%*#?&^]{8,}$/.test(
+  return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&^_-])[A-Za-z\d@$!%*#?&^_-]{8,}$/.test(
     password,
   )
 }
