@@ -39,6 +39,8 @@ export const createGroup = mutationField('createGroup', {
   resolve: (_, { data }, context: Context) => {
     if (!data.name) throw new Error(emptyStringErrorMessage('Name'))
 
+    //TODO: ajouter l'utilisateur connecté automatiquement dans le groupe
+
     return context.prisma.group.create({
       data: {
         name: data.name,
