@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/features/list/views/lists_page.dart';
 import 'package:frontend/src/pages/groups_page.dart';
-import 'package:frontend/src/pages/lists_page.dart';
 import 'package:frontend/src/pages/recipes_page.dart';
 
 class HomeScreen extends StatefulWidget {
