@@ -30,7 +30,7 @@ class ListsPage extends ConsumerWidget {
                       child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(shoppingList.name),
+                      Text(shoppingList.id.toString()),
                       const SizedBox(height: 10),
                       Text(shoppingList.name)
                     ],
