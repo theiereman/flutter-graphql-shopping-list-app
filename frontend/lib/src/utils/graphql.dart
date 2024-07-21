@@ -7,5 +7,9 @@ final _serverLink = HttpLink('http://10.0.2.2:4000');
 
 @Riverpod(keepAlive: true)
 GraphQLClient graphQLClient(GraphQLClientRef ref) {
-  return GraphQLClient(link: _serverLink, cache: GraphQLCache());
+  return GraphQLClient(
+      defaultPolicies:
+          DefaultPolicies(query: Policies(fetch: FetchPolicy.networkOnly)),
+      link: _serverLink,
+      cache: GraphQLCache());
 }

@@ -5,12 +5,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'list_repository.g.dart';
 
-// @riverpod
-// Future<void> ListRepository(ListRepositoryRef ref) async {
-//   final graphQL = ref.watch(graphQLClientProvider);
-//   return await graphQL.
-// }
-
 class ListRepository {
   const ListRepository(this._graphQLClient);
   final GraphQLClient _graphQLClient;
