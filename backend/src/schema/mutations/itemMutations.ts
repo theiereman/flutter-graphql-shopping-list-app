@@ -2,8 +2,8 @@ import { mutationField, nonNull } from 'nexus'
 import { Context } from '../../context'
 import { inputObjectType } from 'nexus/dist/core'
 
-export const IngredientCreationInput = inputObjectType({
-  name: 'IngredientCreationInput',
+const AddItemToListInput = inputObjectType({
+  name: 'ItemCreationInput',
   definition(t) {
     t.nonNull.string('name')
     t.string('description')
@@ -17,7 +17,21 @@ export const IngredientCreationInput = inputObjectType({
   },
 })
 
-//TODO: implémenter une conversion automatique des unités lors de l'ajout / modification
+const IngredientCreationInput = inputObjectType({
+  name: 'IngredientCreationInput',
+  definition(t) {
+    t.nonNull.string('name')
+    t.string('description')
+    t.nonNull.field('category', {
+      type: 'ItemCategory',
+      default: 'NONE',
+    })
+    t.nonNull.float('amount', {
+      default: 1,
+    })
+    t.nonNull.int('listId')
+  },
+})
 
 export const createItem = mutationField('createItem', {
   type: 'Item',
@@ -32,6 +46,7 @@ export const createItem = mutationField('createItem', {
         iconUrl: '',
         amount: data.amount,
         category: data.category,
+        listId: data.listId,
       },
     })
   },

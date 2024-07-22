@@ -41,6 +41,7 @@ input IngredientCreationInput {
   amount: Float! = 1
   category: ItemCategory! = NONE
   description: String
+  listId: Int!
   name: String!
 }
 

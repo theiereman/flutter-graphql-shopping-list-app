@@ -32,6 +32,7 @@ export interface NexusGenInputs {
     amount: number; // Float!
     category: NexusGenEnums['ItemCategory']; // ItemCategory!
     description?: string | null; // String
+    listId: number; // Int!
     name: string; // String!
   }
   UserCreateInput: { // input type
