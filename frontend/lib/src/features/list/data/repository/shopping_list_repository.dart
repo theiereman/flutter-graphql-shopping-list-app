@@ -3,7 +3,7 @@ import 'package:frontend/src/utils/graphql.dart';
 import 'package:graphql/client.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'list_repository.g.dart';
+part 'shopping_list_repository.g.dart';
 
 class ListRepository {
   const ListRepository(this._graphQLClient);
@@ -12,11 +12,17 @@ class ListRepository {
   Future<List<ShoppingList>> fetchLists() async {
     const listsQuery = r'''
       query Lists {
-      lists {
-        id
-        name
+        lists {
+          id
+          name
+          items {
+            id
+            description
+            name
+            amount
+          }
+        }
       }
-    }
     ''';
 
     final QueryOptions options = QueryOptions(document: gql(listsQuery));
