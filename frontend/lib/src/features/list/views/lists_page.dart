@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/src/features/list/data/repository/shopping_list_repository.dart';
 import 'package:frontend/src/features/list/domain/shopping_list.dart';
+import 'package:frontend/src/helpers/string_formatter.dart';
 
 class ListsPage extends ConsumerWidget {
   const ListsPage({super.key});
@@ -32,7 +33,8 @@ class ListsPage extends ConsumerWidget {
                     children: [
                       Text(shoppingList.name),
                       const SizedBox(height: 10),
-                      Text("${shoppingList.items.length.toString()} items")
+                      Text(StringFormatter.numberOf(
+                          shoppingList.items.length, "item"))
                     ],
                   )));
             },
