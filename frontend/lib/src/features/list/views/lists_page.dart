@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:frontend/src/features/list/data/repository/list_repository.dart';
+import 'package:frontend/src/features/list/data/repository/shopping_list_repository.dart';
 import 'package:frontend/src/features/list/domain/shopping_list.dart';
 
 class ListsPage extends ConsumerWidget {
@@ -30,9 +30,9 @@ class ListsPage extends ConsumerWidget {
                       child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(shoppingList.id.toString()),
+                      Text(shoppingList.name),
                       const SizedBox(height: 10),
-                      Text(shoppingList.name)
+                      Text("${shoppingList.items.length.toString()} items")
                     ],
                   )));
             },
