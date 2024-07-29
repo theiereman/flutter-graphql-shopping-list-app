@@ -12,8 +12,13 @@ class ListPage extends ConsumerWidget {
     final AsyncValue<ShoppingList> currentShoppingList =
         ref.watch(ListQueryProvider(listId));
 
-    return Container(
-      child: currentShoppingList.when(
+    return Scaffold(
+      appBar: AppBar(
+          title: currentShoppingList.when(
+              data: (ShoppingList data) => Text(data.name),
+              error: (Object error, StackTrace stackTrace) => const Text("N/A"),
+              loading: () => const CircularProgressIndicator())),
+      body: currentShoppingList.when(
           data: (shoppingList) => Text(shoppingList.name),
           error: (Object error, StackTrace stackTrace) =>
               Text('Error : $error'),

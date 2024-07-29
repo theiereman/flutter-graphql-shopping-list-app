@@ -40,7 +40,36 @@ class ListRepository {
   }
 
   Future<ShoppingList> fetchList(int id) async {
-    return ShoppingList(id: id, name: "Liste 1");
+    const singleListQuery = r'''
+      query List($listId: Int!) {
+        list(id: $listId) {
+          id
+          name
+          items {
+            id
+            name
+            amount
+            category
+            description
+          }
+        }
+      }
+    ''';
+
+    final QueryOptions options = QueryOptions(
+      document: gql(singleListQuery),
+      variables: <String, dynamic>{
+        'listId': id,
+      },
+    );
+
+    final QueryResult result = await _graphQLClient.query(options);
+
+    if (result.hasException) {
+      throw Exception(result.exception);
+    }
+
+    return ShoppingList.fromMap(result.data?['list']);
   }
 }
 
