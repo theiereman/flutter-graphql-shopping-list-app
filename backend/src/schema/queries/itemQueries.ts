@@ -13,7 +13,7 @@ export const getAllCategories = queryField('categories', {
 
 export const getAllItems = queryField('items', {
   type: list(nonNull('Item')),
-  resolve: (_parent, _args, context: Context) => {
-    return context.prisma.item.findMany()
+  resolve: async (_parent, _args, context: Context) => {
+    return await context.prisma.item.findMany()
   },
 })

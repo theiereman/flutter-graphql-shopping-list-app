@@ -3,8 +3,8 @@ import { Context } from '../../context'
 
 export const getAllUsers = queryField('users', {
   type: nonNull(list(nonNull('User'))),
-  resolve: (_parent, _args, context: Context) => {
-    return context.prisma.user.findMany()
+  resolve: async (_parent, _args, context: Context) => {
+    return await context.prisma.user.findMany()
   },
 })
 
@@ -13,8 +13,8 @@ export const getUser = queryField('user', {
   args: {
     id: nonNull(intArg()),
   },
-  resolve: (_parent, args, context: Context) => {
-    return context.prisma.user.findUnique({
+  resolve: async (_parent, args, context: Context) => {
+    return await context.prisma.user.findUnique({
       where: {
         id: args.id,
       },

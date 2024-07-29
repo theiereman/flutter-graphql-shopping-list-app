@@ -3,8 +3,8 @@ import { Context } from '../../context'
 
 export const getAllGroups = queryField('groups', {
   type: nonNull(list(nonNull('Group'))),
-  resolve: (_parent, _args, context: Context) => {
-    return context.prisma.group.findMany()
+  resolve: async (_parent, _args, context: Context) => {
+    return await context.prisma.group.findMany()
   },
 })
 
@@ -13,8 +13,8 @@ export const getGroup = queryField('group', {
   args: {
     id: nonNull(intArg()),
   },
-  resolve: (_parent, args, context: Context) => {
-    return context.prisma.group.findUnique({
+  resolve: async (_parent, args, context: Context) => {
+    return await context.prisma.group.findUnique({
       where: {
         id: args.id,
       },
