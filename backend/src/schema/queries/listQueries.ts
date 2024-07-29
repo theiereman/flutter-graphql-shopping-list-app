@@ -1,19 +1,24 @@
-import {
-  arg,
-  booleanArg,
-  inputObjectType,
-  intArg,
-  list,
-  nonNull,
-  objectType,
-  queryField,
-} from 'nexus'
+import { booleanArg, intArg, list, nonNull, queryField } from 'nexus'
 import { Context } from '../../context'
 
 export const getAllLists = queryField('lists', {
   type: nonNull(list(nonNull('List'))),
   resolve: (_parent, _args, context: Context) => {
     return context.prisma.list.findMany()
+  },
+})
+
+export const getList = queryField('list', {
+  type: 'List',
+  args: {
+    id: nonNull(intArg()),
+  },
+  resolve: (_parent, args, context: Context) => {
+    return context.prisma.list.findUnique({
+      where: {
+        id: args.id,
+      },
+    })
   },
 })
 

@@ -110,6 +110,7 @@ type Query {
   group(id: Int!): Group
   groups: [Group!]!
   items: [Item!]
+  list(id: Int!): List
   lists: [List!]!
   listsFromUser(
     """Include the lists of the groups the user take part of."""

@@ -150,6 +150,7 @@ export interface NexusGenFieldTypes {
     group: NexusGenRootTypes['Group'] | null; // Group
     groups: NexusGenRootTypes['Group'][]; // [Group!]!
     items: NexusGenRootTypes['Item'][] | null; // [Item!]
+    list: NexusGenRootTypes['List'] | null; // List
     lists: NexusGenRootTypes['List'][]; // [List!]!
     listsFromUser: NexusGenRootTypes['List'][]; // [List!]!
     user: NexusGenRootTypes['User'] | null; // User
@@ -210,6 +211,7 @@ export interface NexusGenFieldTypeNames {
     group: 'Group'
     groups: 'Group'
     items: 'Item'
+    list: 'List'
     lists: 'List'
     listsFromUser: 'List'
     user: 'User'
@@ -264,6 +266,9 @@ export interface NexusGenArgTypes {
   }
   Query: {
     group: { // args
+      id: number; // Int!
+    }
+    list: { // args
       id: number; // Int!
     }
     listsFromUser: { // args
