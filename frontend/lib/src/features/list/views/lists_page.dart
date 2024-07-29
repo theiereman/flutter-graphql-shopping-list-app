@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/src/features/list/data/repository/shopping_list_repository.dart';
 import 'package:frontend/src/features/list/domain/shopping_list.dart';
 import 'package:frontend/src/helpers/string_formatter.dart';
+import 'package:go_router/go_router.dart';
 
 class ListsPage extends ConsumerWidget {
   const ListsPage({super.key});
@@ -20,23 +21,26 @@ class ListsPage extends ConsumerWidget {
                 crossAxisCount: 2, childAspectRatio: 1.4),
             itemBuilder: (context, index) {
               final shoppingList = value[index];
-              return Container(
-                  decoration: BoxDecoration(
-                      color: Colors.blue[100],
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(20))),
-                  margin: const EdgeInsets.all(10),
-                  padding: const EdgeInsets.all(20),
-                  child: Center(
-                      child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(shoppingList.name),
-                      const SizedBox(height: 10),
-                      Text(StringFormatter.numberOf(
-                          shoppingList.items.length, "item"))
-                    ],
-                  )));
+              return GestureDetector(
+                onTap: () => context.go('/lists/${shoppingList.id}'),
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.blue[100],
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(20))),
+                    margin: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(20),
+                    child: Center(
+                        child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(shoppingList.name),
+                        const SizedBox(height: 10),
+                        Text(StringFormatter.numberOf(
+                            shoppingList.items.length, "item"))
+                      ],
+                    ))),
+              );
             },
           ),
         AsyncError(:final error) => Text('Error : $error'),

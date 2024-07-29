@@ -38,6 +38,10 @@ class ListRepository {
     });
     return list;
   }
+
+  Future<ShoppingList> fetchList(int id) async {
+    return ShoppingList(id: id, name: "Liste 1");
+  }
 }
 
 @Riverpod(keepAlive: true)
@@ -49,4 +53,10 @@ ListRepository listRepository(ListRepositoryRef ref) {
 Future<List<ShoppingList>> listsQuery(ListsQueryRef ref) async {
   final repository = ref.watch(listRepositoryProvider);
   return repository.fetchLists();
+}
+
+@riverpod
+Future<ShoppingList> listQuery(ListQueryRef ref, int id) async {
+  final repository = ref.watch(listRepositoryProvider);
+  return repository.fetchList(id);
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/features/list/views/list_page.dart';
 import 'package:frontend/src/features/list/views/lists_page.dart';
 import 'package:frontend/src/pages/groups_page.dart';
 import 'package:frontend/src/pages/recipes_page.dart';
@@ -25,9 +26,14 @@ final _router = GoRouter(
           branches: [
             StatefulShellBranch(navigatorKey: _shellListsNavigatorKey, routes: [
               GoRoute(
-                path: '/lists',
-                builder: (context, state) => const ListsPage(),
-              )
+                  path: '/lists',
+                  builder: (context, state) => const ListsPage(),
+                  routes: [
+                    GoRoute(
+                        path: ':id',
+                        builder: (context, state) => ListPage(
+                            listId: int.parse(state.pathParameters['id']!)))
+                  ])
             ]),
             StatefulShellBranch(
                 navigatorKey: _shellRecipesNavigatorKey,
