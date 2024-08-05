@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/src/features/list/data/repository/shopping_list_repository.dart';
 import 'package:frontend/src/features/list/domain/shopping_list.dart';
 import 'package:frontend/src/helpers/string_formatter.dart';
+import 'package:frontend/src/routing/app_router.dart';
 import 'package:go_router/go_router.dart';
 
 class ListsPage extends ConsumerWidget {
@@ -22,7 +23,9 @@ class ListsPage extends ConsumerWidget {
             itemBuilder: (context, index) {
               final shoppingList = value[index];
               return GestureDetector(
-                onTap: () => context.go('/lists/${shoppingList.id}'),
+                //onTap: () => context.go('/lists/${shoppingList.id}'),
+                onTap: () => context.goNamed(AppRoutes.shoppingListDetails.name,
+                    pathParameters: {'id': shoppingList.id.toString()}),
                 child: Container(
                     decoration: BoxDecoration(
                         color: Colors.blue[100],
