@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/src/features/list/domain/shopping_list.dart';
-import 'package:frontend/src/features/list/views/list_page.dart';
-import 'package:frontend/src/features/list/views/lists_page.dart';
+import 'package:frontend/src/features/list/views/pages/shopping_list_details_page.dart';
+import 'package:frontend/src/features/list/views/pages/shopping_lists_page.dart';
 import 'package:frontend/src/pages/groups_page.dart';
 import 'package:frontend/src/pages/recipes_page.dart';
 import 'package:frontend/src/routing/navigation_scaffold.dart';
@@ -35,12 +35,12 @@ final _router = GoRouter(
               GoRoute(
                   name: AppRoutes.shoppingLists.name,
                   path: '/lists',
-                  builder: (context, state) => const ListsPage(),
+                  builder: (context, state) => const ShoppingListsPage(),
                   routes: [
                     GoRoute(
                         name: AppRoutes.shoppingListDetails.name,
                         path: ':id',
-                        builder: (context, state) => ListPage(
+                        builder: (context, state) => ShoppingListDetailsPage(
                             listId: int.parse(state.pathParameters['id']!)))
                   ])
             ]),

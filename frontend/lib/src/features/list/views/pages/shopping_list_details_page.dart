@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/src/features/list/data/repository/shopping_list_repository.dart';
 import 'package:frontend/src/features/list/domain/shopping_list.dart';
 
-class ListPage extends ConsumerWidget {
-  const ListPage({super.key, required this.listId});
+class ShoppingListDetailsPage extends ConsumerWidget {
+  const ShoppingListDetailsPage({super.key, required this.listId});
   final int listId;
 
   @override
