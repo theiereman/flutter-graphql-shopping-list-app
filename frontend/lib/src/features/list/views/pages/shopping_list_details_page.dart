@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend/src/constants/strings.dart';
 import 'package:frontend/src/features/list/data/repository/shopping_list_repository.dart';
 import 'package:frontend/src/features/list/domain/shopping_list.dart';
 
@@ -21,7 +22,7 @@ class ShoppingListDetailsPage extends ConsumerWidget {
       body: currentShoppingList.when(
           data: (shoppingList) => Text(shoppingList.name),
           error: (Object error, StackTrace stackTrace) =>
-              Text('Error : $error'),
+              Text('${Strings.error} : $error'),
           loading: () => const CircularProgressIndicator()),
     );
   }

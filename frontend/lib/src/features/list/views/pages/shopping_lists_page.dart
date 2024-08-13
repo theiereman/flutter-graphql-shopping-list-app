@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend/src/constants/strings.dart';
 import 'package:frontend/src/features/list/data/repository/shopping_list_repository.dart';
 import 'package:frontend/src/features/list/domain/shopping_list.dart';
 import 'package:frontend/src/features/list/views/widgets/shopping_list_entry.dart';
@@ -29,7 +30,7 @@ class ShoppingListsPage extends ConsumerWidget {
               );
             },
           ),
-        AsyncError(:final error) => Text('Error : $error'),
+        AsyncError(:final error) => Text('${Strings.error} : $error'),
         _ => const CircularProgressIndicator(),
       },
     );

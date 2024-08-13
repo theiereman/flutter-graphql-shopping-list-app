@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/src/features/list/domain/shopping_list.dart';
 import 'package:frontend/src/features/list/views/pages/shopping_list_details_page.dart';
 import 'package:frontend/src/features/list/views/pages/shopping_lists_page.dart';
 import 'package:frontend/src/pages/groups_page.dart';
