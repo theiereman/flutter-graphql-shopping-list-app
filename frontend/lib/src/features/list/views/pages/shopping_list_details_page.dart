@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/src/constants/strings.dart';
 import 'package:frontend/src/features/list/data/repository/shopping_list_repository.dart';
 import 'package:frontend/src/features/list/domain/shopping_list.dart';
+import 'package:frontend/src/features/list/views/widgets/add_item_to_shopping_list_sheet.dart';
 import 'package:frontend/src/features/list/views/widgets/shopping_list_item.dart';
 
 class ShoppingListDetailsPage extends ConsumerWidget {
@@ -17,22 +18,30 @@ class ShoppingListDetailsPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
           title: currentShoppingList.when(
-              data: (ShoppingList data) => Text(data.name),
+              data: (ShoppingList data) => Text(
+                    data.name,
+                    style: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.w700,
+                        color: Theme.of(context).colorScheme.primary),
+                  ),
               error: (Object error, StackTrace stackTrace) => const Text("N/A"),
               loading: () => const CircularProgressIndicator())),
       body: currentShoppingList.when(
           data: (shoppingList) {
-            if (shoppingList.items.isNotEmpty) {
-              return ListView.builder(
-                itemCount: shoppingList.items.length,
-                itemBuilder: (context, index) {
-                  final item = shoppingList.items[index];
-                  return ShoppingListItem(item: item);
-                },
-              );
-            } else {
-              return const Center(child: Text("No items in this list"));
-            }
+            return Stack(children: [
+              if (shoppingList.items.isNotEmpty)
+                ListView.builder(
+                  itemCount: shoppingList.items.length,
+                  itemBuilder: (context, index) {
+                    final item = shoppingList.items[index];
+                    return ShoppingListItem(item: item);
+                  },
+                )
+              else
+                const Center(child: Text("No items in this list")),
+              AddItemToShoppingListSheet()
+            ]);
           },
           error: (Object error, StackTrace stackTrace) =>
               Text('${Strings.error} : $error'),
