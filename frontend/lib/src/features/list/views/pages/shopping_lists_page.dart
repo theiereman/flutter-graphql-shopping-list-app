@@ -15,7 +15,7 @@ class ShoppingListsPage extends ConsumerWidget {
     final AsyncValue<List<ShoppingList>> listOfAllShoppingLists =
         ref.watch(listsQueryProvider);
 
-    return Container(
+    return Center(
       child: switch (listOfAllShoppingLists) {
         AsyncData(:final value) => GridView.builder(
             itemCount: value.length,

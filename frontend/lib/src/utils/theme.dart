@@ -36,4 +36,6 @@ ThemeData theme(ThemeRef ref) {
 class CustomTheme {
   static const BorderRadius defaultRadius =
       BorderRadius.all(Radius.circular(5));
+  static const EdgeInsets defaultPadding = EdgeInsets.all(5);
+  static const EdgeInsets defaultMargin = EdgeInsets.all(10);
 }
