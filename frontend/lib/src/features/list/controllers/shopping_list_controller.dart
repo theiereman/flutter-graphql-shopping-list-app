@@ -17,7 +17,8 @@ class ShoppingListController extends _$ShoppingListController {
     final itemRepo = ref.read(itemRepositoryProvider);
     state = const AsyncLoading();
     await itemRepo.addItemToList(name: name, listId: listId);
-    ref.refresh(listQueryProvider(listId).future);
+    ref.invalidate(listQueryProvider(listId));
+    ref.invalidate(listsQueryProvider);
     await future;
   }
 }
