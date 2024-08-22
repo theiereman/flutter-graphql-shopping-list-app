@@ -17,35 +17,30 @@ class ShoppingListDetailsPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-          title: currentShoppingList.when(
-              data: (ShoppingList data) => Text(
-                    data.name,
-                    style: TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.w700,
-                        color: Theme.of(context).colorScheme.primary),
-                  ),
-              error: (Object error, StackTrace stackTrace) => const Text("N/A"),
-              loading: () => const CircularProgressIndicator())),
-      body: currentShoppingList.when(
-          data: (shoppingList) {
-            return Stack(children: [
-              if (shoppingList.items.isNotEmpty)
-                ListView.builder(
-                  itemCount: shoppingList.items.length,
-                  itemBuilder: (context, index) {
-                    final item = shoppingList.items[index];
-                    return ShoppingListItem(item: item);
-                  },
-                )
-              else
-                const Center(child: Text("No items in this list")),
-              AddItemToShoppingListSheet(listId: listId)
-            ]);
-          },
-          error: (Object error, StackTrace stackTrace) =>
-              Text('${Strings.error} : $error'),
-          loading: () => const CircularProgressIndicator()),
+        title: switch (currentShoppingList) {
+          AsyncValue<ShoppingList>(:final valueOrNull?) =>
+            Text(valueOrNull.name),
+          AsyncValue(:final error?) => Text('Error: $error'),
+          _ => const CircularProgressIndicator(),
+        },
+      ),
+      body: switch (currentShoppingList) {
+        AsyncValue<ShoppingList>(:final valueOrNull?) => Stack(children: [
+            if (valueOrNull.items.isNotEmpty)
+              ListView.builder(
+                itemCount: valueOrNull.items.length,
+                itemBuilder: (context, index) {
+                  final item = valueOrNull.items[index];
+                  return ShoppingListItem(item: item);
+                },
+              )
+            else
+              const Center(child: Text("No items in this list")),
+            AddItemToShoppingListSheet(listId: listId)
+          ]),
+        AsyncValue(:final error?) => Text('Error: $error'),
+        _ => const CircularProgressIndicator(),
+      },
     );
   }
 }
