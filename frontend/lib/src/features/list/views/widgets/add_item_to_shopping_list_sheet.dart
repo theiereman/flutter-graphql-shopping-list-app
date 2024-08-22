@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend/src/features/list/controllers/shopping_list_controller.dart';
 import 'package:frontend/src/utils/theme.dart';
 
-class AddItemToShoppingListSheet extends StatelessWidget {
-  const AddItemToShoppingListSheet({super.key});
+class AddItemToShoppingListSheet extends ConsumerWidget {
+  const AddItemToShoppingListSheet({super.key, required this.listId});
+
+  final int listId;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return DraggableScrollableSheet(
       initialChildSize: 0.13,
       minChildSize: 0.13,
@@ -27,7 +31,11 @@ class AddItemToShoppingListSheet extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
-                onSubmitted: (newItem) {},
+                onSubmitted: (itemName) {
+                  ref
+                      .read(shoppingListControllerProvider(listId).notifier)
+                      .addItemToList(name: itemName, listId: listId);
+                },
                 decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,

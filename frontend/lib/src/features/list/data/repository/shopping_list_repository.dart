@@ -71,6 +71,40 @@ class ListRepository {
 
     return ShoppingList.fromMap(result.data?['list']);
   }
+
+  //? not tested yet
+  Future<ShoppingList> addList(ShoppingList list) async {
+    const addListMutation = r'''
+      mutation AddList($name: String!) {
+        addList(name: $name) {
+          id
+          name
+          items {
+            id
+            name
+            amount
+            category
+            description
+          }
+        }
+      }
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(addListMutation),
+      variables: <String, dynamic>{
+        'name': list.name,
+      },
+    );
+
+    final QueryResult result = await _graphQLClient.mutate(options);
+
+    if (result.hasException) {
+      throw Exception(result.exception);
+    }
+
+    return ShoppingList.fromMap(result.data?['addList']);
+  }
 }
 
 @Riverpod(keepAlive: true)
