@@ -1,18 +1,23 @@
-import 'package:frontend/src/features/items/domain/item.dart';
+import 'package:frontend/src/features/items/data/repository/item_repository.dart';
 import 'package:frontend/src/features/list/data/repository/shopping_list_repository.dart';
+import 'package:frontend/src/features/list/domain/shopping_list.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'shopping_list_controller.g.dart';
 
 @riverpod
-class ListPageController extends _$ListPageController {
+class ShoppingListController extends _$ShoppingListController {
   @override
-  FutureOr<void> build() {
-    //no-op
+  Future<ShoppingList> build(int listId) {
+    return ref.watch(listQueryProvider(listId).future);
   }
 
-  Future<void> addList(String name) async {
-    final listRepository = ref.read(listRepositoryProvider);
-    listRepository.
+  Future<void> addItemToList(
+      {required String name, required int listId}) async {
+    final itemRepo = ref.read(itemRepositoryProvider);
+    state = const AsyncLoading();
+    await itemRepo.addItemToList(name: name, listId: listId);
+    ref.refresh(listQueryProvider(listId).future);
+    await future;
   }
 }
