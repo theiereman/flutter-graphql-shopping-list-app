@@ -72,11 +72,7 @@ class ListRepository {
     return ShoppingList.fromMap(result.data?['list']);
   }
 
-  //! TODO: tester !!
-  //! TODO: tester !!
-  //! TODO: tester !!
-  //! TODO: tester !!
-  //! TODO: tester !!
+  //? not tested yet
   Future<ShoppingList> addList(ShoppingList list) async {
     const addListMutation = r'''
       mutation AddList($name: String!) {
