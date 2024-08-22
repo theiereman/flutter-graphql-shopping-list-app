@@ -20,7 +20,7 @@ class ShoppingListDetailsPage extends ConsumerWidget {
         title: switch (currentShoppingList) {
           AsyncValue<ShoppingList>(:final valueOrNull?) =>
             Text(valueOrNull.name),
-          AsyncValue(:final error?) => Text('Error: $error'),
+          AsyncValue(:final error?) => Text('${Strings.error}: $error'),
           _ => const CircularProgressIndicator(),
         },
       ),
@@ -35,10 +35,11 @@ class ShoppingListDetailsPage extends ConsumerWidget {
                 },
               )
             else
-              const Center(child: Text("No items in this list")),
+              const Center(child: Text(Strings.no_items_in_list)),
             AddItemToShoppingListSheet(listId: listId)
           ]),
-        AsyncValue(:final error?) => Text('Error: $error'),
+        AsyncValue(:final error?) =>
+          Center(child: Text('${Strings.error}: $error')),
         _ => const CircularProgressIndicator(),
       },
     );

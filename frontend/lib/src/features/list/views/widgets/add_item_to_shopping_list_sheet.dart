@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend/src/constants/strings.dart';
 import 'package:frontend/src/features/list/controllers/shopping_list_controller.dart';
 import 'package:frontend/src/utils/theme.dart';
 
@@ -39,7 +40,7 @@ class AddItemToShoppingListSheet extends ConsumerWidget {
                 decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    labelText: 'Search...',
+                    labelText: Strings.searchbar_hint,
                     focusedBorder: OutlineInputBorder(
                         borderRadius: CustomTheme.defaultRadius,
                         borderSide: BorderSide(
