@@ -7,7 +7,7 @@ part of 'shopping_list_controller.dart';
 // **************************************************************************
 
 String _$shoppingListControllerHash() =>
-    r'405ff8b7c1a5da5933cce247c36b800b5167e6b3';
+    r'e9b1a399fa72c504c7e8ee368f640fb20fb91ecb';
 
 /// Copied from Dart SDK
 class _SystemHash {
