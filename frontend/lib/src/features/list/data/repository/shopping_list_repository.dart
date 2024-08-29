@@ -72,20 +72,12 @@ class ListRepository {
     return ShoppingList.fromMap(result.data?['list']);
   }
 
-  //? not tested yet
-  Future<ShoppingList> addList(ShoppingList list) async {
+  Future<void> addList(String name) async {
     const addListMutation = r'''
-      mutation AddList($name: String!) {
-        addList(name: $name) {
+      mutation AddListForUser($addListForUserData: UserListCreationInput!) {
+        addListForUser(data: $addListForUserData) {
           id
           name
-          items {
-            id
-            name
-            amount
-            category
-            description
-          }
         }
       }
     ''';
@@ -93,7 +85,10 @@ class ListRepository {
     final MutationOptions options = MutationOptions(
       document: gql(addListMutation),
       variables: <String, dynamic>{
-        'name': list.name,
+        'addListForUserData': {
+          'name': name,
+          'userId': 1, //! TODO: get user id from auth
+        }
       },
     );
 
@@ -103,7 +98,7 @@ class ListRepository {
       throw Exception(result.exception);
     }
 
-    return ShoppingList.fromMap(result.data?['addList']);
+    return;
   }
 }
 
