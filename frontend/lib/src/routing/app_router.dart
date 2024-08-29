@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/features/list/views/pages/shopping_list_create.dart';
 import 'package:frontend/src/features/list/views/pages/shopping_list_details_page.dart';
 import 'package:frontend/src/features/list/views/pages/shopping_lists_page.dart';
 import 'package:frontend/src/pages/groups_page.dart';
@@ -10,6 +11,7 @@ enum AppRoutes {
   homeScreen,
   shoppingLists,
   shoppingListDetails,
+  shoppingListCreate,
   recipes,
   groups
 }
@@ -25,6 +27,7 @@ final GlobalKey<NavigatorState> _shellGroupsNavigatorKey =
 final _router = GoRouter(
     initialLocation: '/lists',
     navigatorKey: _rootNavigatorKey,
+    debugLogDiagnostics: true,
     routes: [
       StatefulShellRoute.indexedStack(
           builder: (context, state, navigationShell) =>
@@ -37,8 +40,14 @@ final _router = GoRouter(
                   builder: (context, state) => const ShoppingListsPage(),
                   routes: [
                     GoRoute(
-                        name: AppRoutes.shoppingListDetails.name,
+                        path: 'create',
+                        name: AppRoutes.shoppingListCreate.name,
+                        parentNavigatorKey: _shellListsNavigatorKey,
+                        builder: (context, state) =>
+                            const ShoppingListCreatePage()),
+                    GoRoute(
                         path: ':id',
+                        name: AppRoutes.shoppingListDetails.name,
                         builder: (context, state) => ShoppingListDetailsPage(
                             listId: int.parse(state.pathParameters['id']!)))
                   ])

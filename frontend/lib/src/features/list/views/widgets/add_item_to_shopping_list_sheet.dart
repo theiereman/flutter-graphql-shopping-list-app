@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/src/constants/strings.dart';
-import 'package:frontend/src/features/list/controllers/shopping_list_controller.dart';
+import 'package:frontend/src/features/list/controllers/shopping_list_details_controller.dart';
 import 'package:frontend/src/utils/theme.dart';
 
 class AddItemToShoppingListSheet extends ConsumerWidget {
@@ -34,7 +34,8 @@ class AddItemToShoppingListSheet extends ConsumerWidget {
               child: TextField(
                 onSubmitted: (itemName) {
                   ref
-                      .read(shoppingListControllerProvider(listId).notifier)
+                      .read(shoppingListDetailsControllerProvider(listId)
+                          .notifier)
                       .addItemToList(name: itemName, listId: listId);
                 },
                 decoration: InputDecoration(

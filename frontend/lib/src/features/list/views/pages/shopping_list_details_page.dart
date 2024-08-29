@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/src/constants/strings.dart';
-import 'package:frontend/src/features/list/controllers/shopping_list_controller.dart';
+import 'package:frontend/src/features/list/controllers/shopping_list_details_controller.dart';
 import 'package:frontend/src/features/list/domain/shopping_list.dart';
 import 'package:frontend/src/features/list/views/widgets/add_item_to_shopping_list_sheet.dart';
 import 'package:frontend/src/features/list/views/widgets/shopping_list_item.dart';
@@ -13,7 +13,7 @@ class ShoppingListDetailsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<ShoppingList> currentShoppingList =
-        ref.watch(shoppingListControllerProvider(listId));
+        ref.watch(shoppingListDetailsControllerProvider(listId));
 
     return Scaffold(
       appBar: AppBar(
