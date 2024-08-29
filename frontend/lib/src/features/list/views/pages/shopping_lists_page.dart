@@ -15,24 +15,34 @@ class ShoppingListsPage extends ConsumerWidget {
     final AsyncValue<List<ShoppingList>> listOfAllShoppingLists =
         ref.watch(listsQueryProvider);
 
-    return Center(
-      child: switch (listOfAllShoppingLists) {
-        AsyncData(:final value) => GridView.builder(
-            itemCount: value.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, childAspectRatio: 1.75),
-            itemBuilder: (context, index) {
-              final shoppingList = value[index];
-              return GestureDetector(
-                onTap: () => context.goNamed(AppRoutes.shoppingListDetails.name,
-                    pathParameters: {'id': shoppingList.id.toString()}),
-                child: ShoppingListEntry(shoppingList: shoppingList),
-              );
-            },
-          ),
-        AsyncError(:final error) => Text('${Strings.error} : $error'),
-        _ => const CircularProgressIndicator(),
-      },
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("My lists"),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => context.goNamed(AppRoutes.shoppingListCreate.name),
+        child: const Icon(Icons.add),
+      ),
+      body: Center(
+        child: switch (listOfAllShoppingLists) {
+          AsyncData(:final value) => GridView.builder(
+              itemCount: value.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, childAspectRatio: 1.75),
+              itemBuilder: (context, index) {
+                final shoppingList = value[index];
+                return GestureDetector(
+                  onTap: () => context.goNamed(
+                      AppRoutes.shoppingListDetails.name,
+                      pathParameters: {'id': shoppingList.id.toString()}),
+                  child: ShoppingListEntry(shoppingList: shoppingList),
+                );
+              },
+            ),
+          AsyncError(:final error) => Text('${Strings.error} : $error'),
+          _ => const CircularProgressIndicator(),
+        },
+      ),
     );
   }
 }
