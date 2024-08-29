@@ -18,7 +18,7 @@ https://trello.com/b/0uBiZ7ee/application-liste-de-courses-recettes
 
 ### Run build_runner to watch Riverpod changes and auto-generate files
 
-`flutter pub run build_runner watch`
+`dart run build_runner watch`
 
 ### Usage of flutter_dotenv for secrets
 
