@@ -1,6 +1,4 @@
-import 'package:frontend/src/features/items/data/repository/item_repository.dart';
 import 'package:frontend/src/features/list/data/repository/shopping_list_repository.dart';
-import 'package:frontend/src/features/list/domain/shopping_list.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'shopping_list_controller.g.dart';
@@ -8,16 +6,14 @@ part 'shopping_list_controller.g.dart';
 @riverpod
 class ShoppingListController extends _$ShoppingListController {
   @override
-  Future<ShoppingList> build(int listId) {
-    return ref.watch(listQueryProvider(listId).future);
+  FutureOr<void> build() async {
+    //no-op
   }
 
-  Future<void> addItemToList(
-      {required String name, required int listId}) async {
-    final itemRepo = ref.read(itemRepositoryProvider);
+  Future<void> addList({required String name}) async {
+    final listRepo = ref.read(listRepositoryProvider);
     state = const AsyncLoading();
-    await itemRepo.addItemToList(name: name, listId: listId);
-    ref.invalidate(listQueryProvider(listId));
+    state = await AsyncValue.guard(() async => await listRepo.addList(name));
     ref.invalidate(listsQueryProvider);
     await future;
   }
