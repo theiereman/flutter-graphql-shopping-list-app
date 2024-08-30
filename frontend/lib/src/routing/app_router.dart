@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/src/features/list/views/pages/shopping_list_create.dart';
-import 'package:frontend/src/features/list/views/pages/shopping_list_details_page.dart';
-import 'package:frontend/src/features/list/views/pages/shopping_lists_page.dart';
+import 'package:frontend/src/features/list/presentation/pages/shopping_list_create.dart';
+import 'package:frontend/src/features/list/presentation/pages/shopping_list_details_page.dart';
+import 'package:frontend/src/features/list/presentation/pages/shopping_lists_page.dart';
 import 'package:frontend/src/pages/groups_page.dart';
 import 'package:frontend/src/pages/recipes_page.dart';
 import 'package:frontend/src/routing/navigation_scaffold.dart';
