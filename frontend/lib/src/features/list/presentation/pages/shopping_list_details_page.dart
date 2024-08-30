@@ -31,7 +31,35 @@ class ShoppingListDetailsPage extends ConsumerWidget {
                 itemCount: valueOrNull.items.length,
                 itemBuilder: (context, index) {
                   final item = valueOrNull.items[index];
-                  return ShoppingListItem(item: item);
+                  return Dismissible(
+                      key: Key(item.toString()),
+                      onDismissed: (direction) {
+                        valueOrNull.items.removeAt(index);
+                        ref
+                            .read(shoppingListDetailsControllerProvider(listId)
+                                .notifier)
+                            .removeItemFromList(
+                                itemId: item.id, listId: listId);
+                      },
+                      background: Container(
+                        color: Theme.of(context).colorScheme.error,
+                        alignment: Alignment.centerLeft, // Aligner à gauche
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Icon(
+                          Icons.delete,
+                          color: Colors.white,
+                        ),
+                      ),
+                      secondaryBackground: Container(
+                        color: Theme.of(context).colorScheme.error,
+                        alignment: Alignment.centerRight, // Aligner à droite
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Icon(
+                          Icons.delete,
+                          color: Colors.white,
+                        ),
+                      ),
+                      child: ShoppingListItem(item: item));
                 },
               )
             else
