@@ -12,6 +12,16 @@ class ShoppingListDetailsController extends _$ShoppingListDetailsController {
     return ref.watch(listQueryProvider(listId).future);
   }
 
+  Future<void> removeItemFromList(
+      {required int itemId, required int listId}) async {
+    final itemRepo = ref.read(itemRepositoryProvider);
+    state = const AsyncLoading();
+    await itemRepo.removeItemFromList(itemId: itemId, listId: listId);
+    ref.invalidate(listQueryProvider(listId));
+    ref.invalidate(listsQueryProvider);
+    await future;
+  }
+
   Future<void> addItemToList(
       {required String name, required int listId}) async {
     final itemRepo = ref.read(itemRepositoryProvider);

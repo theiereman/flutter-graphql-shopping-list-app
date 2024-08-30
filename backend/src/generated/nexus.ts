@@ -35,6 +35,10 @@ export interface NexusGenInputs {
     listId: number; // Int!
     name: string; // String!
   }
+  RemoveItemFromListInput: { // input type
+    itemId: number; // Int!
+    listId: number; // Int!
+  }
   UserCreateInput: { // input type
     email: string; // String!
     password: string; // String!
@@ -142,6 +146,7 @@ export interface NexusGenFieldTypes {
     createUser: NexusGenRootTypes['User'] | null; // User
     deleteGroup: NexusGenRootTypes['Group'] | null; // Group
     deleteUser: NexusGenRootTypes['User'] | null; // User
+    removeItemFromList: NexusGenRootTypes['Item'] | null; // Item
     updateGroup: NexusGenRootTypes['Group'] | null; // Group
     updateUser: NexusGenRootTypes['User'] | null; // User
   }
@@ -203,6 +208,7 @@ export interface NexusGenFieldTypeNames {
     createUser: 'User'
     deleteGroup: 'Group'
     deleteUser: 'User'
+    removeItemFromList: 'Item'
     updateGroup: 'Group'
     updateUser: 'User'
   }
@@ -256,6 +262,9 @@ export interface NexusGenArgTypes {
     }
     deleteUser: { // args
       data: NexusGenInputs['UserDeleteInput']; // UserDeleteInput!
+    }
+    removeItemFromList: { // args
+      data: NexusGenInputs['RemoveItemFromListInput']; // RemoveItemFromListInput!
     }
     updateGroup: { // args
       data: NexusGenInputs['GroupUpdateInput']; // GroupUpdateInput!

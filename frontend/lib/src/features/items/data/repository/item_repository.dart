@@ -46,6 +46,35 @@ class ItemRepository {
 
     return;
   }
+
+  Future<void> removeItemFromList(
+      {required int itemId, required int listId}) async {
+    const removeItemFromListMutation = r'''
+        mutation RemoveItemFromList($data: RemoveItemFromListInput!) {
+        removeItemFromList(data: $data) {
+          id
+        }
+      }
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(removeItemFromListMutation),
+      variables: <String, dynamic>{
+        'data': {
+          'itemId': itemId,
+          'listId': listId,
+        }
+      },
+    );
+
+    final QueryResult result = await _graphQLClient.mutate(options);
+
+    if (result.hasException) {
+      throw Exception(result.exception.toString());
+    }
+
+    return;
+  }
 }
 
 @Riverpod(keepAlive: true)
