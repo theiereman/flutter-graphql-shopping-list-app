@@ -101,6 +101,7 @@ type Mutation {
   createUser(data: UserCreateInput!): User
   deleteGroup(data: GroupDeleteInput!): Group
   deleteUser(data: UserDeleteInput!): User
+  removeItemFromList(data: RemoveItemFromListInput!): Item
   updateGroup(data: GroupUpdateInput!): Group
   updateUser(data: UserUpdateInput!): User
 }
@@ -124,6 +125,11 @@ type Query {
 type Recipe {
   id: Int!
   name: String!
+}
+
+input RemoveItemFromListInput {
+  itemId: Int!
+  listId: Int!
 }
 
 type User {
