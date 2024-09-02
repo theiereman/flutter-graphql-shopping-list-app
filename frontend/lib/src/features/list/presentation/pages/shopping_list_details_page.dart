@@ -44,8 +44,8 @@ class ShoppingListDetailsPage extends ConsumerWidget {
                       background: Container(
                         color: Theme.of(context).colorScheme.error,
                         alignment: Alignment.centerLeft, // Aligner à gauche
-                        padding: EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Icon(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: const Icon(
                           Icons.delete,
                           color: Colors.white,
                         ),
@@ -53,8 +53,8 @@ class ShoppingListDetailsPage extends ConsumerWidget {
                       secondaryBackground: Container(
                         color: Theme.of(context).colorScheme.error,
                         alignment: Alignment.centerRight, // Aligner à droite
-                        padding: EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Icon(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: const Icon(
                           Icons.delete,
                           color: Colors.white,
                         ),
@@ -63,7 +63,7 @@ class ShoppingListDetailsPage extends ConsumerWidget {
                 },
               )
             else
-              const Center(child: Text(Strings.no_items_in_list)),
+              const Center(child: Text(Strings.noItemsInList)),
             AddItemToShoppingListSheet(listId: listId)
           ]),
         AsyncValue(:final error?) =>

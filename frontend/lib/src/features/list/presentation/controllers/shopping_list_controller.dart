@@ -17,4 +17,12 @@ class ShoppingListController extends _$ShoppingListController {
     ref.invalidate(listsQueryProvider);
     await future;
   }
+
+  Future<void> deleteList({required int id}) async {
+    final listRepo = ref.read(listRepositoryProvider);
+    state = const AsyncLoading();
+    state = await AsyncValue.guard(() async => await listRepo.deleteList(id));
+    ref.invalidate(listsQueryProvider);
+    await future;
+  }
 }
