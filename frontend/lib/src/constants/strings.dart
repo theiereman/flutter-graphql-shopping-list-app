@@ -1,5 +1,12 @@
 class Strings {
+  // GLOBAL
   static const error = "Error";
-  static const no_items_in_list = "No items in this list";
-  static const searchbar_hint = "Search...";
+
+  // SHOPPING LIST
+  static const myLists = "My lists";
+  static const noItemsInList = "No items in this list";
+  static const deleteList = "Delete this list";
+
+  // ITEMS
+  static const itemSearchbarHint = "Search...";
 }

@@ -41,7 +41,7 @@ class AddItemToShoppingListSheet extends ConsumerWidget {
                 decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    labelText: Strings.searchbar_hint,
+                    labelText: Strings.itemSearchbarHint,
                     focusedBorder: OutlineInputBorder(
                         borderRadius: CustomTheme.defaultRadius,
                         borderSide: BorderSide(
