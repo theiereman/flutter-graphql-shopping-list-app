@@ -2,6 +2,10 @@
 ### Do not make changes to this file directly
 
 
+input DeleteListInput {
+  id: Int!
+}
+
 type Group {
   id: Int!
   lists: [List!]!
@@ -100,6 +104,7 @@ type Mutation {
   createItem(data: IngredientCreationInput!): Item
   createUser(data: UserCreateInput!): User
   deleteGroup(data: GroupDeleteInput!): Group
+  deleteList(data: DeleteListInput!): List
   deleteUser(data: UserDeleteInput!): User
   removeItemFromList(data: RemoveItemFromListInput!): Item
   updateGroup(data: GroupUpdateInput!): Group
