@@ -4,6 +4,7 @@ import 'package:frontend/src/constants/strings.dart';
 import 'package:frontend/src/features/list/data/repository/shopping_list_repository.dart';
 import 'package:frontend/src/features/list/domain/shopping_list.dart';
 import 'package:frontend/src/features/list/presentation/controllers/shopping_list_controller.dart';
+import 'package:frontend/src/features/list/presentation/widgets/delete_list_sheet.dart';
 import 'package:frontend/src/features/list/presentation/widgets/shopping_list_entry.dart';
 import 'package:frontend/src/helpers/async_value_error_snackbar.dart';
 import 'package:frontend/src/routing/app_router.dart';
@@ -46,35 +47,8 @@ class ShoppingListsPage extends ConsumerWidget {
                     showModalBottomSheet<void>(
                       context: context,
                       builder: (BuildContext context) {
-                        return Center(
-                          heightFactor: 2,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              ElevatedButton(
-                                  //red background
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor:
-                                          Theme.of(context).colorScheme.error),
-                                  child: Text(Strings.deleteList,
-                                      style: TextStyle(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onError)),
-                                  onPressed: () async {
-                                    await ref
-                                        .read(shoppingListControllerProvider
-                                            .notifier)
-                                        .deleteList(id: shoppingList.id);
-
-                                    if (context.mounted) {
-                                      Navigator.pop(context);
-                                    }
-                                  }),
-                            ],
-                          ),
-                        );
+                        return DeleteListBottomSheet(
+                            shoppingListId: shoppingList.id);
                       },
                     );
                   },

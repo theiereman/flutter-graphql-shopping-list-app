@@ -3,7 +3,7 @@ import 'package:frontend/src/features/items/domain/item.dart';
 import 'package:frontend/src/utils/theme.dart';
 
 class ShoppingListItem extends StatelessWidget {
-  const ShoppingListItem({Key? key, required this.item}) : super(key: key);
+  const ShoppingListItem({super.key, required this.item});
 
   final Item item;
 
