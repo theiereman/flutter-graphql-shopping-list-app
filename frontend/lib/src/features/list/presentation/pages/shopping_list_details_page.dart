@@ -32,10 +32,9 @@ class ShoppingListDetailsPage extends ConsumerWidget {
                 itemBuilder: (context, index) {
                   final item = valueOrNull.items[index];
                   return Dismissible(
-                      key: Key(item.toString()),
-                      onDismissed: (direction) {
-                        valueOrNull.items.removeAt(index);
-                        ref
+                      key: Key(item.id.toString()),
+                      onDismissed: (direction) async {
+                        await ref
                             .read(shoppingListDetailsControllerProvider(listId)
                                 .notifier)
                             .removeItemFromList(
