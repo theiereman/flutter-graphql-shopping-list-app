@@ -14,6 +14,9 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  DeleteListInput: { // input type
+    id: number; // Int!
+  }
   GroupCreateInput: { // input type
     name: string; // String!
   }
@@ -145,6 +148,7 @@ export interface NexusGenFieldTypes {
     createItem: NexusGenRootTypes['Item'] | null; // Item
     createUser: NexusGenRootTypes['User'] | null; // User
     deleteGroup: NexusGenRootTypes['Group'] | null; // Group
+    deleteList: NexusGenRootTypes['List'] | null; // List
     deleteUser: NexusGenRootTypes['User'] | null; // User
     removeItemFromList: NexusGenRootTypes['Item'] | null; // Item
     updateGroup: NexusGenRootTypes['Group'] | null; // Group
@@ -207,6 +211,7 @@ export interface NexusGenFieldTypeNames {
     createItem: 'Item'
     createUser: 'User'
     deleteGroup: 'Group'
+    deleteList: 'List'
     deleteUser: 'User'
     removeItemFromList: 'Item'
     updateGroup: 'Group'
@@ -259,6 +264,9 @@ export interface NexusGenArgTypes {
     }
     deleteGroup: { // args
       data: NexusGenInputs['GroupDeleteInput']; // GroupDeleteInput!
+    }
+    deleteList: { // args
+      data: NexusGenInputs['DeleteListInput']; // DeleteListInput!
     }
     deleteUser: { // args
       data: NexusGenInputs['UserDeleteInput']; // UserDeleteInput!

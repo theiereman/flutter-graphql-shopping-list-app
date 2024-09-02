@@ -18,6 +18,13 @@ const GroupListCreateInput = inputObjectType({
   },
 })
 
+const DeleteListInput = inputObjectType({
+  name: 'DeleteListInput',
+  definition(t) {
+    t.nonNull.int('id')
+  },
+})
+
 export const addListForUser = mutationField('addListForUser', {
   type: 'List',
   args: {
@@ -43,6 +50,20 @@ export const addListToGroup = mutationField('addListToGroup', {
       data: {
         groupId: args.data.groupId,
         name: args.data.name,
+      },
+    })
+  },
+})
+
+export const deleteList = mutationField('deleteList', {
+  type: 'List',
+  args: {
+    data: nonNull(DeleteListInput),
+  },
+  resolve: (_, args, context: Context) => {
+    return context.prisma.list.delete({
+      where: {
+        id: args.data.id,
       },
     })
   },
