@@ -4,8 +4,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'graphql.g.dart';
 
-final _defaultURI = 'http://10.0.2.2:4000'; //for mobile dev
-final _serverLink = HttpLink('${dotenv.env['SERVER_URI'] ?? _defaultURI}');
+const _defaultURI = 'http://10.0.2.2:4000'; //for mobile dev
+final _serverLink = HttpLink(dotenv.env['SERVER_URI'] ?? _defaultURI);
 
 @Riverpod(keepAlive: true)
 GraphQLClient graphQLClient(GraphQLClientRef ref) {

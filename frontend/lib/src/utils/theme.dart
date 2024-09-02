@@ -10,7 +10,7 @@ const _textWhite = Colors.white;
 const _primaryColor = Color(0xff2e4057);
 const _secondaryColor = Color(0xff95adc9);
 const _accentColor = Color(0xffff8811);
-final _okColor = Color(0xff28965A);
+// final _okColor = Color(0xff28965A);
 const _errorColor = Color(0xffe71d36);
 
 final _theme = ThemeData(

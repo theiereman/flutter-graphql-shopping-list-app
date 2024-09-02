@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/src/constants/strings.dart';
 import 'package:frontend/src/features/list/domain/shopping_list.dart';
 import 'package:frontend/src/helpers/string_formatter.dart';
 import 'package:frontend/src/utils/theme.dart';
@@ -29,11 +30,13 @@ class ShoppingListEntry extends StatelessWidget {
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
-                  color: Theme.of(context).colorScheme.onPrimaryFixed),
+                  color: Theme.of(context).colorScheme.onPrimary),
             ),
-            Text(StringFormatter.numberOf(shoppingList.items.length, "item"),
-                style: TextStyle(
-                    color: Theme.of(context).colorScheme.onPrimaryFixed))
+            Text(
+                StringFormatter.numberOf(
+                    shoppingList.items.length, Strings.item),
+                style:
+                    TextStyle(color: Theme.of(context).colorScheme.onPrimary))
           ],
         ));
   }

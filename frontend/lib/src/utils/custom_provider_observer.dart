@@ -1,5 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+// ignore_for_file: avoid_print
+// TODO : implement logging framework
+
 class CustomProviderObserver extends ProviderObserver {
   @override
   void didAddProvider(

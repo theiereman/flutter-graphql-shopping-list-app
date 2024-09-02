@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/src/constants/strings.dart';
 import 'package:frontend/src/features/list/presentation/controllers/shopping_list_details_controller.dart';
-import 'package:frontend/src/utils/theme.dart';
+import 'package:frontend/src/mixins/inputs_borders.dart';
 
 class AddItemToShoppingListSheet extends ConsumerWidget {
   const AddItemToShoppingListSheet({super.key, required this.listId});
@@ -42,24 +42,10 @@ class AddItemToShoppingListSheet extends ConsumerWidget {
                     filled: true,
                     fillColor: Colors.white,
                     labelText: Strings.itemSearchbarHint,
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: CustomTheme.defaultRadius,
-                        borderSide: BorderSide(
-                            width: 2,
-                            color: Theme.of(context).colorScheme.secondary)),
-                    errorBorder: OutlineInputBorder(
-                        borderRadius: CustomTheme.defaultRadius,
-                        borderSide: BorderSide(
-                            width: 2,
-                            color: Theme.of(context).colorScheme.error)),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: CustomTheme.defaultRadius,
-                        borderSide: BorderSide(
-                            width: 2,
-                            color: Theme.of(context).colorScheme.secondary)),
-                    disabledBorder: const OutlineInputBorder(
-                        borderRadius: CustomTheme.defaultRadius,
-                        borderSide: BorderSide(width: 2, color: Colors.grey))),
+                    focusedBorder: outlineInputBorderDefault(context),
+                    errorBorder: outlineInputBorderError(context),
+                    enabledBorder: outlineInputBorderDefault(context),
+                    disabledBorder: outlineInputBorderDisabled()),
               ),
             ),
           ),

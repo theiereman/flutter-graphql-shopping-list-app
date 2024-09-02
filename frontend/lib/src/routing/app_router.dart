@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:frontend/src/features/list/presentation/pages/shopping_list_create.dart';
 import 'package:frontend/src/features/list/presentation/pages/shopping_list_details_page.dart';
 import 'package:frontend/src/features/list/presentation/pages/shopping_lists_page.dart';
-import 'package:frontend/src/pages/groups_page.dart';
-import 'package:frontend/src/pages/recipes_page.dart';
 import 'package:frontend/src/routing/navigation_scaffold.dart';
 import 'package:go_router/go_router.dart';
 
@@ -58,7 +56,8 @@ final _router = GoRouter(
                   GoRoute(
                     name: AppRoutes.recipes.name,
                     path: '/recipes',
-                    builder: (context, state) => const RecipesPage(),
+                    builder: (context, state) =>
+                        const Center(child: Text("Not implemented yet!")),
                   )
                 ]),
             StatefulShellBranch(
@@ -67,7 +66,8 @@ final _router = GoRouter(
                   GoRoute(
                     name: AppRoutes.groups.name,
                     path: '/groups',
-                    builder: (context, state) => const GroupsPage(),
+                    builder: (context, state) =>
+                        const Center(child: Text("Not implemented yet!")),
                   )
                 ])
           ])
