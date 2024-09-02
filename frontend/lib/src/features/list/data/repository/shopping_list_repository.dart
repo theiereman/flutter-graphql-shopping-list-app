@@ -100,6 +100,31 @@ class ListRepository {
 
     return;
   }
+
+  Future<void> deleteList(int id) async {
+    const deleteListMutation = r'''
+      mutation DeleteList($deleteListData: DeleteListInput!) {
+        deleteList(data: $deleteListData) {
+          id
+        }
+      }
+    ''';
+
+    final MutationOptions options = MutationOptions(
+      document: gql(deleteListMutation),
+      variables: <String, dynamic>{
+        'deleteListData': {'id': id}
+      },
+    );
+
+    final QueryResult result = await _graphQLClient.mutate(options);
+
+    if (result.hasException) {
+      throw Exception(result.exception);
+    }
+
+    return;
+  }
 }
 
 @Riverpod(keepAlive: true)
