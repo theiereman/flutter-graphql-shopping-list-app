@@ -5,6 +5,7 @@ import 'package:frontend/src/features/list/presentation/controllers/shopping_lis
 import 'package:frontend/src/features/list/domain/shopping_list.dart';
 import 'package:frontend/src/features/list/presentation/widgets/add_item_to_shopping_list_sheet.dart';
 import 'package:frontend/src/features/list/presentation/widgets/shopping_list_item.dart';
+import 'package:frontend/src/helpers/async_value_error_snackbar.dart';
 
 class ShoppingListDetailsPage extends ConsumerWidget {
   const ShoppingListDetailsPage({super.key, required this.listId});
@@ -12,6 +13,10 @@ class ShoppingListDetailsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen<AsyncValue>(
+      shoppingListDetailsControllerProvider(listId),
+      (_, state) => state.showSnackbarOnError(context),
+    );
     final AsyncValue<ShoppingList> currentShoppingList =
         ref.watch(shoppingListDetailsControllerProvider(listId));
 
