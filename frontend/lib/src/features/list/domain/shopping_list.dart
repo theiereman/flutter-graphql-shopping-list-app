@@ -28,4 +28,12 @@ class ShoppingList extends Equatable {
       'items': items.map((item) => item.toMap()).toList(),
     };
   }
+
+  ShoppingList copyWith({int? id, String? name, List<Item>? items}) {
+    return ShoppingList(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      items: items ?? this.items,
+    );
+  }
 }
