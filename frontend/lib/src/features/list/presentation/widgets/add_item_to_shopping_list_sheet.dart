@@ -43,9 +43,9 @@ class _AddItemToShoppingListSheetState
   }
 
   void _onScroll() {
-    if (sheetScrollController.size == _minSheetHeight) {
+    if (sheetScrollController.size < _minSheetHeight + 0.001) {
       _toggleSheetState(open: false);
-    } else if (sheetScrollController.size == _maxSheetHeight) {
+    } else if (sheetScrollController.size >= _maxSheetHeight - 0.001) {
       _toggleSheetState(open: true);
     }
   }
