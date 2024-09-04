@@ -2,6 +2,7 @@ class Strings {
   // GLOBAL
   static const error = "Error";
   static const submit = "Submit";
+  static const nameRequired = "The name is required";
 
   // SHOPPING LIST INFO
   static const myLists = "My lists";
@@ -10,7 +11,6 @@ class Strings {
 
   //SHOPPING LIST CREATION
   static const listName = "List name";
-  static const nameRequired = "The name is required";
 
   // ITEMS
   static const itemSearchbarHint = "Search...";
